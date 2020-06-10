@@ -6,6 +6,7 @@
 
     <groupId>com.jizi</groupId>
     <artifactId>myService</artifactId>
+    <packaging>jar</packaging>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
@@ -23,5 +24,32 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
     </dependencies>
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-jar-plugin</artifactId>
+                    <configuration>
+                        <!-- Configuration of the archiver -->
+                        <archive>
+                            <!--生成的jar中，不要包含pom.xml和pom.properties这两个文件-->
+                            <addMavenDescriptor>false</addMavenDescriptor>
 
+                            <!-- Manifest specific configuration -->
+                            <manifest>
+                                <!--是否要把第三方jar放到manifest的classpath中-->
+                                <addClasspath>true</addClasspath>
+
+                                <!--生成的manifest中classpath的前缀，
+                                因为要把第三方jar放到lib目录下，
+                                所以classpath的前缀是lib/-->
+                                <classpathPrefix>lib/</classpathPrefix>
+                            </manifest>
+                        </archive>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
 </project>
